@@ -30,3 +30,10 @@
   ```
 
 - next.js는 없는 url로 가게 되면 404 페이지를 제공해 준다.
+
+## Static Pre Rendering
+
+- react.js 는 client-side-render를 이용하며 이는 사용자의 브라우저가 사용자가 보는 UI를 모두 만든다.
+- client-side-render에서 HTML 파일은 텅빈 파일이며 script가 들어오면서 화면을 렌더링하게 된다. 따라서 느린 환경에서는 흰색화면을 바라보는 시간이 길어진다.
+- next.js에서는 pre-rendering을 통해서 실제 HTML이 존재해 화면에 보여지게 되는 것을 확인할 수 있다. 따라서 느린 환경이거나 스크립트가 비활성화된 환경에서도 흰색 화면이 아닌 화면을 사용자가 확인할 수 있다.
+- pre-rendering을 통해서 seo 친화적으로 사이트를 만들기가 가능하다.
