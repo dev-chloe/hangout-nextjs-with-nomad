@@ -1,0 +1,16 @@
+.nav_box {
+  display: flex;
+  justify-content: flex-start;
+  background-color: lightblue;
+  gap: 16px;
+  padding: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.active {
+  color: darkred;
+}
