@@ -62,3 +62,13 @@ export default function NavBar() {
 ```
 
 [참조](https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-tag)
+
+## _app.js
+
+- next.js는 `_app.js`를 통해 page를 초기화 한다.
+  1. 페이지 변경 간에 레이아웃 유지
+  2. 페이지 탐색 시 state 유지
+  3. componentDidCatch를 사용한 Custom 에러 처리
+  4. 페이지에 추가 데이터 삽입
+  5. Global CSS 추가
+- 파일명.module.css 파일 형태를 제외한 모든 나머지 css파일들은 _app.js에서만 import해와서 사용해야 한다. (글로벌 css간의 충돌을 피하기 위해서이다.)
