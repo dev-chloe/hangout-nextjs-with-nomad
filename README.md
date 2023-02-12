@@ -37,3 +37,28 @@
 - client-side-render에서 HTML 파일은 텅빈 파일이며 script가 들어오면서 화면을 렌더링하게 된다. 따라서 느린 환경에서는 흰색화면을 바라보는 시간이 길어진다.
 - next.js에서는 pre-rendering을 통해서 실제 HTML이 존재해 화면에 보여지게 되는 것을 확인할 수 있다. 따라서 느린 환경이거나 스크립트가 비활성화된 환경에서도 흰색 화면이 아닌 화면을 사용자가 확인할 수 있다.
 - pre-rendering을 통해서 seo 친화적으로 사이트를 만들기가 가능하다.
+
+## Link with a tab
+
+- 13버전 이후로 `<Link>`안에  `<a>` 없이 사용할수 있도록 변했다.
+- jsx를 사용할 때 a 태그를 읽을 수 없어서 css가 적용이 안 된다.
+- legacyBehavior를 사용하여 `<a>`를 넣어 읽게 할 수 있다.
+
+```javascript
+export default function NavBar() {
+  const router = useRouter();
+  return (
+    <nav>
+      <Link href="/" legacyBehavior><a>Home</a></Link>
+      <Link href="/about" legacyBehavior><a>About</a></Link>
+      <style jsx>{`
+        a {
+          text-decoration: none;
+        }
+      `}</style>
+    </nav >
+  )
+}
+```
+
+[참조](https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-tag)
