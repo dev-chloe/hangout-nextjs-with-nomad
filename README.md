@@ -110,3 +110,50 @@ export default function Seo({ title }) {
   )
 }
 ```
+
+# Redirect and Rewrite
+
+- next.config.js 에서는 커스텀 설정이 가능하다.
+
+1. Redirect
+
+- Redirect을 사용하면 들어오는 request 경로를 다른 destination 경로로 Redirect할 수 있다.
+
+```javascript
+module.exports = {
+  reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: "/contact", // 입력되는 주소
+        destination: "/form", // 포워딩 되는 곳
+        permanent: false
+      },
+      {
+        source: "/old-blog/:path*", // /old-blog/1221/cont/23
+        destination: "/new-blog/:path*", // /new-blog/1221/cont/23
+        permanent: false
+      }
+    ]
+  }
+}
+```
+
+2. Rewrite
+
+- Rewrites를 사용하면 들어오는 request 경로를 다른 destination 경로에 매핑할 수 있다.
+
+```javascript
+const API_KEY = process.env.API_KEY;
+module.exports = {
+  reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: "/api/movies",
+        destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
+      }
+    ]
+  }
+}
+```
