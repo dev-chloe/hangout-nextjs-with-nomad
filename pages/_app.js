@@ -1,16 +1,10 @@
-import NavBar from '../components/NavBar'
+import Layout from '../components/Layout'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
-  return <>
-    <NavBar />
+  return <Layout>
     <Component {...pageProps} />
-    <style jsx global>{`
-      body {
-        color: blue;
-      }
-    `}</style>
-  </>
+  </Layout>
 }
 
 export default MyApp

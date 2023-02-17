@@ -72,3 +72,41 @@ export default function NavBar() {
   4. 페이지에 추가 데이터 삽입
   5. Global CSS 추가
 - 파일명.module.css 파일 형태를 제외한 모든 나머지 css파일들은 _app.js에서만 import해와서 사용해야 한다. (글로벌 css간의 충돌을 피하기 위해서이다.)
+
+# patterns
+
+1. `Laybout.js`
+
+- `_app.js`는 global로 import 해야할 것들이 많이 있다. (ex, Google Analytics와 검색 엔진에 관한 것들)
+- `_app.js` 파일이 커지는 것을 방지하기 위해서 `Laybout.js` 파일을 만들어 큰 틀을 만든다.
+
+    ```javascript
+    import NavBar from "./NavBar";
+
+    export default function Layout({ children }) { // children은 component를 말한다.
+      return (
+        <>
+          <NavBar /> 
+          <div>{children}</div>
+        </>
+      )
+    }
+    ```
+
+2. `Head component`
+
+- React.js 같은 경우 app의 head 부분을 관리하기 위해서는 react helmet 같은 또다른 라이브러리를 사용해야한다. 이 말은 현 프로젝트와는 별개인 새로운 컴포넌트, 코드, 오류 등이 생길 수 있다는 뜻이다.
+- `next/head`는Next.js가 제공하는 패키지이다.
+- 이는 더 많은 prop들을 넣어서 개인화를 하여 만들수 있다. (다른 태그나, Meta Description, 또는 작성자 정보 등)
+
+```javascript
+import Head from "next/head";
+
+export default function Seo({ title }) {
+  return (
+    <Head>
+      <title>{title} | Next Movies</title>
+    </Head>
+  )
+}
+```
