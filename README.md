@@ -194,3 +194,25 @@ export default function NavBar() {
         }
       }
       ```
+
+## Server Side Rendering
+
+- next.js에서 Server Side Rendering을 하기 위해서 `getServerSideProps`를 사용한다.
+- `getServerSideProps`는 오직 server side 에서만 동작한다.
+- `getServerSideProps`는 json 데이터를 반환하며 이는 각 페이지에 렌더링 되기 위해 사용된다.
+- `getServerSideProps`는 매 요청마다 데이터가 반드시 패칭되어야 하는 페이지를 렌더링 할 때 사용된다.
+
+## 이전 git 삭제
+
+  ```bash
+  # git 삭제
+  git rm --cached -r .      
+
+  # check
+  git status
+
+  # 올리기
+  git add .  
+  git commit --amend --no-edit      
+  git push -u origin $(git branch --show-current) -f
+  ```
