@@ -2,6 +2,43 @@
 
 [NextJS 시작하기](https://nomadcoders.co/nextjs-fundamentals)로 따라한 과정
 
+## Quick start
+
+### Save API Key on local only
+
+```bash
+# At the root of repository
+# Set environment variable
+export API_KEY="YOUR_KEY_VALUE"
+env | grep "API_"
+
+# Check exist template
+cat .env.template
+# Check before execute
+envsubst < .env.template
+
+# Create .env file to use local only
+envsubst < .env.template > .env
+# Check result
+cat .env
+
+# (option) Unset environment variable
+unset API_KEY
+```
+
+### Run your applciation
+
+```bash
+# At the root of repository
+# Clean Install - dependencies without fixing lock files for same version
+npm ci
+
+# Start Next.js Application
+npm run dev
+```
+
+---
+
 ## library vs framework
 
 - library
@@ -73,87 +110,87 @@ export default function NavBar() {
   5. Global CSS 추가
 - 파일명.module.css 파일 형태를 제외한 모든 나머지 css파일들은 _app.js에서만 import해와서 사용해야 한다. (글로벌 css간의 충돌을 피하기 위해서이다.)
 
-# patterns
+## patterns
 
 1. `Laybout.js`
 
-- `_app.js`는 global로 import 해야할 것들이 많이 있다. (ex, Google Analytics와 검색 엔진에 관한 것들)
-- `_app.js` 파일이 커지는 것을 방지하기 위해서 `Laybout.js` 파일을 만들어 큰 틀을 만든다.
+    - `_app.js`는 global로 import 해야할 것들이 많이 있다. (ex, Google Analytics와 검색 엔진에 관한 것들)
+    - `_app.js` 파일이 커지는 것을 방지하기 위해서 `Laybout.js` 파일을 만들어 큰 틀을 만든다.
 
-    ```javascript
-    import NavBar from "./NavBar";
+      ```javascript
+      import NavBar from "./NavBar";
 
-    export default function Layout({ children }) { // children은 component를 말한다.
-      return (
-        <>
-          <NavBar /> 
-          <div>{children}</div>
-        </>
-      )
-    }
-    ```
+      export default function Layout({ children }) { // children은 component를 말한다.
+        return (
+          <>
+            <NavBar /> 
+            <div>{children}</div>
+          </>
+        )
+      }
+      ```
 
 2. `Head component`
 
-- React.js 같은 경우 app의 head 부분을 관리하기 위해서는 react helmet 같은 또다른 라이브러리를 사용해야한다. 이 말은 현 프로젝트와는 별개인 새로운 컴포넌트, 코드, 오류 등이 생길 수 있다는 뜻이다.
-- `next/head`는Next.js가 제공하는 패키지이다.
-- 이는 더 많은 prop들을 넣어서 개인화를 하여 만들수 있다. (다른 태그나, Meta Description, 또는 작성자 정보 등)
+    - React.js 같은 경우 app의 head 부분을 관리하기 위해서는 react helmet 같은 또다른 라이브러리를 사용해야한다. 이 말은 현 프로젝트와는 별개인 새로운 컴포넌트, 코드, 오류 등이 생길 수 있다는 뜻이다.
+    - `next/head`는Next.js가 제공하는 패키지이다.
+    - 이는 더 많은 prop들을 넣어서 개인화를 하여 만들수 있다. (다른 태그나, Meta Description, 또는 작성자 정보 등)
 
-```javascript
-import Head from "next/head";
+      ```javascript
+      import Head from "next/head";
 
-export default function Seo({ title }) {
-  return (
-    <Head>
-      <title>{title} | Next Movies</title>
-    </Head>
-  )
-}
-```
+      export default function Seo({ title }) {
+        return (
+          <Head>
+            <title>{title} | Next Movies</title>
+          </Head>
+        )
+      }
+      ```
 
-# Redirect and Rewrite
+## Redirect and Rewrite
 
 - next.config.js 에서는 커스텀 설정이 가능하다.
 
 1. Redirect
 
-- Redirect을 사용하면 들어오는 request 경로를 다른 destination 경로로 Redirect할 수 있다.
+    - Redirect을 사용하면 들어오는 request 경로를 다른 destination 경로로 Redirect할 수 있다.
 
-```javascript
-module.exports = {
-  reactStrictMode: true,
-  async redirects() {
-    return [
-      {
-        source: "/contact", // 입력되는 주소
-        destination: "/form", // 포워딩 되는 곳
-        permanent: false
-      },
-      {
-        source: "/old-blog/:path*", // /old-blog/1221/cont/23
-        destination: "/new-blog/:path*", // /new-blog/1221/cont/23
-        permanent: false
+      ```javascript
+      module.exports = {
+        reactStrictMode: true,
+        async redirects() {
+          return [
+            {
+              source: "/contact", // 입력되는 주소
+              destination: "/form", // 포워딩 되는 곳
+              permanent: false
+            },
+            {
+              source: "/old-blog/:path*", // /old-blog/1221/cont/23
+              destination: "/new-blog/:path*", // /new-blog/1221/cont/23
+              permanent: false
+            }
+          ]
+        }
       }
-    ]
-  }
-}
-```
+      ```
 
 2. Rewrite
 
-- Rewrites를 사용하면 들어오는 request 경로를 다른 destination 경로에 매핑할 수 있다.
+    - Rewrites를 사용하면 들어오는 request 경로를 다른 destination 경로에 매핑할 수 있다.
 
-```javascript
-const API_KEY = process.env.API_KEY;
-module.exports = {
-  reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: "/api/movies",
-        destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
+      ```javascript
+      const API_KEY = process.env.API_KEY;
+      module.exports = {
+        reactStrictMode: true,
+        async rewrites() {
+          return [
+            {
+              source: "/api/movies",
+              destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
+            }
+          ]
+        }
       }
-    ]
-  }
-}
-```
+      ```
