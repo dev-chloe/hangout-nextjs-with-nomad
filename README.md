@@ -202,10 +202,26 @@ export default function NavBar() {
 - `getServerSideProps`는 json 데이터를 반환하며 이는 각 페이지에 렌더링 되기 위해 사용된다.
 - `getServerSideProps`는 매 요청마다 데이터가 반드시 패칭되어야 하는 페이지를 렌더링 할 때 사용된다.
 
+## Dynamic Routes
+
+- next.js에서 라우팅을 하기 위해서는 pages안에 파일이나 폴더를 생성하면된다.
+
+  > `/about` 페이지 만들기
+  >
+  > ![기본 url 만들기](.etc/basic_route_way.png)
+  >
+  > `/movies` 페이지 만들기
+  >
+  > ![폴더 안에서 url 만들기](.etc/in_folder.png)
+  >
+  > `/movies/all` 페이지 만들기
+  >
+  > ![폴더안에서 다른 url 만들기](.etc/in_folder_file.png)
+
 ## 이전 git 삭제
 
   ```bash
-  # git 삭제
+  # git 캐시 삭제
   git rm --cached -r .      
 
   # check
