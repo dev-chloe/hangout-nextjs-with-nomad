@@ -1,12 +1,28 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 export default function Home({ results }) {
+  const router = useRouter();
+  const onClick = (movie) => {
+    router.push({
+      pathname: `movies/${movie.id}`,
+      query: {
+        id: movie.id,
+        title: movie.original_title
+      }
+    }, `movies/${movie.id}`)
+  }
   return (
     <div className="container">
       {results?.map(movie =>
-        <div className="movie" key={movie.id}>
+        <div className="movie" key={movie.id} onClick={() => onClick(movie)}>
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-          <h4>{movie.original_title}</h4>
+          <Link href={`/movies/${movie.id}`}>
+            <h4>{movie.original_title}</h4>
+          </Link>
         </div>
-      )}
+      )
+      }
       <style jsx>{`
         .container {
           display: grid;
@@ -31,7 +47,7 @@ export default function Home({ results }) {
           text-align: center;
         }
       `}</style>
-    </div>
+    </div >
   )
 }
 

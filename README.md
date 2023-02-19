@@ -218,6 +218,48 @@ export default function NavBar() {
   >
   > ![폴더안에서 다른 url 만들기](.etc/in_folder_file.png)
 
+## Link
+
+- `Link'를 이용하여 페이지 이동을 하고 데이터를 넘길 수 있다.
+
+```javascript
+<Link href={{
+        pathname: `movies/${movie.id}`,
+        query: {
+          title: movie.original_title,
+        }
+      }}
+      as{`movies/${movie.id}`}
+>
+  <h4>{movie.original_title}</h4>
+</Link>
+```
+
+- `router.push()'를 이용하여 페이지 이동을 하고 데이터를 넘길 수 있다.
+
+```javascript
+const router = useRouter();
+const onClick = (movie) => {
+  router.push({
+    pathname: `movies/${movie.id}`,
+    query: {
+      id: movie.id,
+      title: movie.original_title
+    }
+  }, `movies/${movie.id}`)
+}
+return (
+    <div className="container">
+      {results?.map(movie =>
+        <div className="movie" key={movie.id} onClick={() => onClick(movie)}>
+          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+          <h4>{movie.original_title}</h4>
+        </div>
+      )}
+    </div >
+  )
+```
+
 ## 이전 git 삭제
 
   ```bash
