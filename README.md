@@ -268,6 +268,10 @@ return (
   1. router를 이용하는 방법(router.query.params)
   2. getServerSideProps()를 이용하는 방법
 
+## 404 page
+
+- page 폴더 밑에 `404.js`파일을 생성하여 커스텀 페이지로 만들 수 있다.
+
 ## 이전 git 삭제
 
   ```bash
