@@ -260,6 +260,14 @@ return (
   )
 ```
 
+## params and router
+
+- `[...prrams].js` 파일을 만들면 next.js 서버는 { params: { parmas: [] } } 객체를 만든다.  
+- `localhost:3000/movies/****/****` 형식의 url 주소로 가면 서버에 { params: { parmas: [] } } 객체가 생성된다.
+- 이 객체를 이용하려면 아래 두 가지가 있다.
+  1. router를 이용하는 방법(router.query.params)
+  2. getServerSideProps()를 이용하는 방법
+
 ## 이전 git 삭제
 
   ```bash
